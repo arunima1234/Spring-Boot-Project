@@ -24,7 +24,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile "org.springframework.boot:spring-boot-devtools"
 	compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.1.0.jre7'
-
+	compile group: 'org.springframework', name: 'spring-websocket', version: '5.2.2.RELEASE'
+	compile group: 'org.springframework', name: 'spring-messaging', version: '5.2.2.RELEASE'
+	
 }
 
 test {

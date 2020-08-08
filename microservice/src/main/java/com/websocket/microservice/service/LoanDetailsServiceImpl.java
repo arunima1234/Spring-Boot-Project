@@ -15,21 +15,21 @@ import com.websocket.microservice.repository.AccountRepository;
 import com.websocket.microservice.repository.CustomerRepository;
 import com.websocket.microservice.repository.LoanDetailsRepository;
 
-public class LoanDetailsServiceImpl implements LoanDetailsService{
+public class LoanDetailsServiceImpl implements LoanDetailsService {
 
 	@Autowired
 	LoanDetailsRepository loanDetailsRepository;
-	
+
 	@Autowired
 	AccountRepository accountRepository;
-	
+
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	@Override
 	public BaseResponse createLoanDetailsRecord(LoanDetailsRequest loanDetailsRequest) {
 		BaseResponse baseResponse = new BaseResponse();
-		if(loanDetailsRequest!=null){
+		if (loanDetailsRequest != null) {
 			LoanDetails loanDetails = new LoanDetails();
 			loanDetails.setAccount(loanDetailsRequest.getAccount());
 			loanDetails.setInterestRate(loanDetailsRequest.getInterestRate());
@@ -49,9 +49,9 @@ public class LoanDetailsServiceImpl implements LoanDetailsService{
 	public List<LoanDetailsResponse> fetchLoanDetailsRecord(int customerId) {
 		Customer customer = customerRepository.findById(customerId);
 		List<Account> accounts = accountRepository.findByCustomer(customer);
-		List<LoanDetailsResponse> loanDetailsList = new ArrayList();
-		for(Account account : accounts){
-			for(LoanDetails loanDetails : account.getLoanDetails()){
+		List<LoanDetailsResponse> loanDetailsList = new ArrayList<>();
+		for (Account account : accounts) {
+			for (LoanDetails loanDetails : account.getLoanDetails()) {
 				LoanDetailsResponse loanDetailResponse = new LoanDetailsResponse();
 				loanDetailResponse.setAccount(account);
 				loanDetailResponse.setInterestRate(loanDetails.getInterestRate());
@@ -61,6 +61,19 @@ public class LoanDetailsServiceImpl implements LoanDetailsService{
 			}
 		}
 		return loanDetailsList;
+	}
+
+	@Override
+	public LoanDetailsResponse fetchMostRecentLoanDetailsRecord() {
+		LoanDetailsResponse loanDetailsResponse = new LoanDetailsResponse();
+		LoanDetails mostRecentLoanDetails = loanDetailsRepository.findMostRecentRecord();
+		if (mostRecentLoanDetails != null) {
+			loanDetailsResponse.setAccount(mostRecentLoanDetails.getAccount());
+			loanDetailsResponse.setInterestRate(mostRecentLoanDetails.getInterestRate());
+			loanDetailsResponse.setLoanAmt(mostRecentLoanDetails.getLoanAmt());
+			loanDetailsResponse.setLoanId(mostRecentLoanDetails.getLoanId());
+		}
+		return loanDetailsResponse;
 	}
 
 }

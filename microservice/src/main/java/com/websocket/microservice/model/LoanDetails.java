@@ -1,5 +1,4 @@
 package com.websocket.microservice.model;
-	
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,7 +14,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 
 /**
  * The persistent class for the api_level_settings database table.
@@ -37,17 +35,17 @@ public class LoanDetails implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "account_id")
 	private Account account;
-	
+
 	@Column(name = "loan_amt")
 	private String loanAmt;
-	
+
 	@Column(name = "interest_rate")
 	private String interestRate;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "created_date")
 	private Date createdDate;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "updated_date")
 	private Date updatedDate;
@@ -112,4 +110,3 @@ public class LoanDetails implements Serializable {
 		return serialVersionUID;
 	}
 }
-

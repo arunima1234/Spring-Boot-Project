@@ -12,4 +12,6 @@ public interface LoanDetailsService {
 
 	List<LoanDetailsResponse> fetchLoanDetailsRecord(int customerId);
 
+	LoanDetailsResponse fetchMostRecentLoanDetailsRecord();
+
 }

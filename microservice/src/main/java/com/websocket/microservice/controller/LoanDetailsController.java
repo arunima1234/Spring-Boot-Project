@@ -19,21 +19,27 @@ import com.websocket.microservice.service.LoanDetailsService;
 
 @RestController
 public class LoanDetailsController {
-	
+
 	@Autowired
 	LoanDetailsService loanDetailsService;
-	
+
 	@PostMapping("/loan-details")
-	public ResponseEntity<BaseResponse> createLoanDetails(@RequestBody LoanDetailsRequest loanDetailsRequest){
+	public ResponseEntity<BaseResponse> createLoanDetails(@RequestBody LoanDetailsRequest loanDetailsRequest) {
 		BaseResponse baseResponse = new BaseResponse();
 		baseResponse = loanDetailsService.createLoanDetailsRecord(loanDetailsRequest);
 		return new ResponseEntity<>(baseResponse, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/loan-details/{customer_id}")
-	public ResponseEntity<List<LoanDetailsResponse>> fetchLoanDetails(@PathVariable("customer_id") int customerId){
+	public ResponseEntity<List<LoanDetailsResponse>> fetchLoanDetails(@PathVariable("customer_id") int customerId) {
 		List<LoanDetailsResponse> loanDetailsResponseList = new ArrayList<LoanDetailsResponse>();
 		loanDetailsResponseList = loanDetailsService.fetchLoanDetailsRecord(customerId);
 		return new ResponseEntity<>(loanDetailsResponseList, HttpStatus.OK);
+	}
+
+	@GetMapping("/recent-loan-details")
+	public ResponseEntity<LoanDetailsResponse> fetchMostRecentLoanDetails(@PathVariable("customer_id") int customerId) {
+		LoanDetailsResponse loanDetailsResponse = loanDetailsService.fetchMostRecentLoanDetailsRecord();
+		return new ResponseEntity<>(loanDetailsResponse, HttpStatus.OK);
 	}
 }

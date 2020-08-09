@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.websocket.microservice.beans.BaseResponse;
 import com.websocket.microservice.beans.LoanDetailsRequest;
@@ -15,6 +16,7 @@ import com.websocket.microservice.repository.AccountRepository;
 import com.websocket.microservice.repository.CustomerRepository;
 import com.websocket.microservice.repository.LoanDetailsRepository;
 
+@Service
 public class LoanDetailsServiceImpl implements LoanDetailsService {
 
 	@Autowired
@@ -53,7 +55,7 @@ public class LoanDetailsServiceImpl implements LoanDetailsService {
 		for (Account account : accounts) {
 			for (LoanDetails loanDetails : account.getLoanDetails()) {
 				LoanDetailsResponse loanDetailResponse = new LoanDetailsResponse();
-				loanDetailResponse.setAccount(account);
+				loanDetailResponse.setAccountId(account.getId());
 				loanDetailResponse.setInterestRate(loanDetails.getInterestRate());
 				loanDetailResponse.setLoanAmt(loanDetails.getLoanAmt());
 				loanDetailResponse.setLoanId(loanDetails.getLoanId());
@@ -68,7 +70,7 @@ public class LoanDetailsServiceImpl implements LoanDetailsService {
 		LoanDetailsResponse loanDetailsResponse = new LoanDetailsResponse();
 		LoanDetails mostRecentLoanDetails = loanDetailsRepository.findMostRecentRecord();
 		if (mostRecentLoanDetails != null) {
-			loanDetailsResponse.setAccount(mostRecentLoanDetails.getAccount());
+			loanDetailsResponse.setAccountId(mostRecentLoanDetails.getAccount().getId());
 			loanDetailsResponse.setInterestRate(mostRecentLoanDetails.getInterestRate());
 			loanDetailsResponse.setLoanAmt(mostRecentLoanDetails.getLoanAmt());
 			loanDetailsResponse.setLoanId(mostRecentLoanDetails.getLoanId());

@@ -1,4 +1,4 @@
-package com.websocket.microservice.beans;
+package com.websocket.clientservice.controller;
 
 public class LoanDetailsResponse {
 	
@@ -11,17 +11,6 @@ public class LoanDetailsResponse {
 	private String loanAmt;
 	
 	private String interestRate;
-
-	public LoanDetailsResponse(int accountId2, String interestRate2, String loanAmt2, String loanId2) {
-		this.accountId = accountId2;
-		this.interestRate = interestRate2;
-		this.loanAmt = loanAmt2;
-		this.loanId = loanId2;
-	}
-
-	public LoanDetailsResponse() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getId() {
 		return id;

@@ -38,7 +38,7 @@ public class LoanDetailsController {
 	}
 
 	@GetMapping("/recent-loan-details")
-	public ResponseEntity<LoanDetailsResponse> fetchMostRecentLoanDetails(@PathVariable("customer_id") int customerId) {
+	public ResponseEntity<LoanDetailsResponse> fetchMostRecentLoanDetails() {
 		LoanDetailsResponse loanDetailsResponse = loanDetailsService.fetchMostRecentLoanDetailsRecord();
 		return new ResponseEntity<>(loanDetailsResponse, HttpStatus.OK);
 	}

@@ -1,17 +1,15 @@
 package com.websocket.microservice.beans;
 
-import com.websocket.microservice.model.Account;
-
 public class LoanDetailsRequest {
-	
+
 	private int id;
 
 	private String loanId;
 
-	private Account account;
-	
+	private int  accountId;
+
 	private String loanAmt;
-	
+
 	private String interestRate;
 
 	public int getId() {
@@ -30,12 +28,12 @@ public class LoanDetailsRequest {
 		this.loanId = loanId;
 	}
 
-	public Account getAccount() {
-		return account;
+	public int getAccountId() {
+		return accountId;
 	}
 
-	public void setAccount(Account account) {
-		this.account = account;
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
 	}
 
 	public String getLoanAmt() {

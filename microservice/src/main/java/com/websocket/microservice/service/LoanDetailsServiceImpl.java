@@ -33,7 +33,9 @@ public class LoanDetailsServiceImpl implements LoanDetailsService {
 		BaseResponse baseResponse = new BaseResponse();
 		if (loanDetailsRequest != null) {
 			LoanDetails loanDetails = new LoanDetails();
-			loanDetails.setAccount(loanDetailsRequest.getAccount());
+			Account account = accountRepository.findById(loanDetailsRequest.getAccountId());
+			if(account!=null)
+				loanDetails.setAccount(account);
 			loanDetails.setInterestRate(loanDetailsRequest.getInterestRate());
 			loanDetails.setLoanAmt(loanDetailsRequest.getLoanAmt());
 			loanDetails.setLoanId(loanDetailsRequest.getLoanId());

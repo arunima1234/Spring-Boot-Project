@@ -7,4 +7,6 @@ import com.websocket.microservice.model.Customer;
 
 public interface AccountRepository extends JpaRepository<Account, Integer>{
 	public List<Account> findByCustomer(Customer customer);
+
+	public Account findById(int accountId);
 }
